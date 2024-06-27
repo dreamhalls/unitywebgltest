@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Unity WebGL Player | MagnifyingGlass</title>
+</head>
+
+<body style="text-align: center; padding: 0; border: 0; margin: 0;">
+  <canvas id="unity-canvas" width=900 height=1950 tabindex="-1"
+    style="width: 900px; height: 1950px; background: #231F20"></canvas>
+  <script src="Build/新建文件夹 (16).loader.js"></script>
+  <script>
+
+
+
+
+
+    ///分辨率适配
+    ///不会写前端，这是抄的
+    // 获取 canvas 元素
+    var canvas = document.getElementById('unity-canvas');
+    // 函数：调整 canvas 尺寸
+    function resizeCanvas() {
+      // 获取用户的屏幕尺寸
+      var screenWidth = window.innerWidth;
+      var screenHeight = window.innerHeight;
+
+      // 设置 canvas 的宽度和高度为屏幕尺寸
+      canvas.width = screenWidth;
+      canvas.height = screenHeight;
+
+      // 设置 canvas 的 CSS 尺寸以匹配屏幕尺寸
+      canvas.style.width = screenWidth + 'px';
+      canvas.style.height = screenHeight + 'px';
+
+      // 这里可以添加任何你想要的画布内容的重绘逻辑
+    }
+    // 初始调整 canvas 尺寸
+    resizeCanvas();
+    // 监听窗口尺寸变化，调整 canvas 尺寸
+    window.addEventListener('resize', resizeCanvas);
+
+    if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+      // Mobile device style: fill the whole browser client area with the game canvas:
+      var meta = document.createElement('meta');
+      meta.name = 'viewport';
+      meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+      document.getElementsByTagName('head')[0].appendChild(meta);
+
+      var canvas = document.querySelector("#unity-canvas");
+      canvas.style.width = "100%";
+      canvas.style.height = "100%";
+      canvas.style.position = "fixed";
+
+      document.body.style.textAlign = "left";
+    }
+
+    createUnityInstance(document.querySelector("#unity-canvas"), {
+      dataUrl: "Build/新建文件夹 (16).data.unityweb",
+      frameworkUrl: "Build/新建文件夹 (16).framework.js.unityweb",
+      codeUrl: "Build/新建文件夹 (16).wasm.unityweb",
+      streamingAssetsUrl: "StreamingAssets",
+      companyName: "DefaultCompany",
+      productName: "MagnifyingGlass",
+      productVersion: "0.1",
+      // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
+      // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
+    });
+  </script>
+</body>
+
+</html>
